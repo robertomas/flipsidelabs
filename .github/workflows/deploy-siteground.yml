@@ -20,9 +20,17 @@ jobs:
           echo "${{ secrets.SITEGROUND_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.SITEGROUND_PORT || '22' }} -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts
+          echo "SSH key configured"
+          echo "Testing SSH connection..."
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'SSH connection successful' && pwd"
       
       - name: Deploy to SiteGround via SSH/rsync
         run: |
+          echo "Starting deployment..."
+          echo "Host: ${{ secrets.SITEGROUND_HOST }}"
+          echo "Port: ${{ secrets.SITEGROUND_PORT || '22' }}"
+          echo "User: ${{ secrets.SITEGROUND_USERNAME }}"
+          echo "Path: ${{ secrets.SITEGROUND_PATH }}"
           rsync -avz --delete \
             --exclude='.git' \
             --exclude='.gitignore' \
@@ -32,6 +40,7 @@ jobs:
             --exclude='*.md' \
             --exclude='.env*' \
             --exclude='*.log' \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=30" \
             ./ ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }}:${{ secrets.SITEGROUND_PATH }}
+          echo "Deployment completed successfully!"
 
