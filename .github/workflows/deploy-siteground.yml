@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: SITEGROUND_HOST  # Utilise l'environment où sont stockés les secrets
     
     steps:
       - name: Checkout code
