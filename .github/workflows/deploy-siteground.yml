@@ -19,7 +19,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SITEGROUND_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ secrets.SITEGROUND_PORT || '22' }} -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts
       
       - name: Deploy to SiteGround via SSH/rsync
         run: |
@@ -32,6 +32,6 @@ jobs:
             --exclude='*.md' \
             --exclude='.env*' \
             --exclude='*.log' \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }}:${{ secrets.SITEGROUND_PATH }}
 

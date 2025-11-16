@@ -51,6 +51,10 @@ cat ~/.ssh/siteground_deploy
 ### Tester la connexion SSH :
 
 ```bash
+# Si vous avez un port personnalisé (ex: 18765)
+ssh -i ~/.ssh/siteground_deploy -p 18765 votre-username@votre-hostname.siteground.com
+
+# Ou avec le port par défaut (22)
 ssh -i ~/.ssh/siteground_deploy votre-username@votre-hostname.siteground.com
 ```
 
@@ -61,7 +65,7 @@ Si ça fonctionne, vous êtes connecté ! Tapez `exit` pour quitter.
 1. Allez sur votre dépôt GitHub : https://github.com/robertomas/flipsidelabs
 2. Cliquez sur **Settings** (en haut à droite)
 3. Dans le menu de gauche, cliquez sur **Secrets and variables** → **Actions**
-4. Cliquez sur **New repository secret** et ajoutez les 4 secrets suivants :
+4. Cliquez sur **New repository secret** et ajoutez les 5 secrets suivants :
 
 ### Secret 1 : `SITEGROUND_HOST`
 - **Name:** `SITEGROUND_HOST`
@@ -76,7 +80,12 @@ Si ça fonctionne, vous êtes connecté ! Tapez `exit` pour quitter.
 - **Value:** Le contenu complet de votre **clé privée** (`~/.ssh/siteground_deploy`)
   - ⚠️ **IMPORTANT** : Copiez TOUT le contenu, y compris `-----BEGIN OPENSSH PRIVATE KEY-----` et `-----END OPENSSH PRIVATE KEY-----`
 
-### Secret 4 : `SITEGROUND_PATH`
+### Secret 4 : `SITEGROUND_PORT`
+- **Name:** `SITEGROUND_PORT`
+- **Value:** Votre port SSH (ex: `18765` pour SiteGround, ou `22` pour le port par défaut)
+  - ⚠️ **IMPORTANT** : SiteGround utilise souvent un port personnalisé (comme 18765), vérifiez dans vos informations SSH
+
+### Secret 5 : `SITEGROUND_PATH`
 - **Name:** `SITEGROUND_PATH`
 - **Value:** Le chemin vers votre répertoire web (généralement `/home/username/public_html/` ou `/public_html/`)
   - Pour trouver le chemin exact, connectez-vous en SSH et tapez `pwd` dans votre répertoire web
@@ -133,7 +142,7 @@ Les fichiers seront déployés dans `/public_html/` sur votre serveur SiteGround
 ### Erreur : "Connection refused" ou "Host key verification failed"
 - Vérifiez que SSH est bien activé sur votre compte SiteGround
 - Vérifiez que le hostname SSH est correct dans `SITEGROUND_HOST`
-- Le port SSH est généralement 22 (par défaut, géré automatiquement)
+- **Vérifiez que le port SSH est correct** dans `SITEGROUND_PORT` (SiteGround utilise souvent un port personnalisé comme 18765, pas le port 22 par défaut)
 
 ### Erreur : "Permission denied (publickey)"
 - Vérifiez que la clé publique est bien importée sur SiteGround
