@@ -1,0 +1,12 @@
+# robots.txt for FlipSideLabs
+# https://flipsidelabs.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://flipsidelabs.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 10
+

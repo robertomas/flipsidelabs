@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayFlow - Send Money Globally with Zero Hidden Fees | EU FinTech</title>
+    <meta name="description" content="Send money to 180+ countries with real exchange rates and transparent fees. Trusted by 3M+ Europeans. PSD2 & GDPR compliant.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PayFlow - Send Money Globally with Zero Hidden Fees">
+    <meta property="og:description" content="Save up to 8x on international transfers. Join 3M+ Europeans.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-left">
+                    <a href="#" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="12" fill="url(#logoGradient)"/>
+                            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="25" cy="15" r="3" fill="#FFD700" opacity="0.8"/>
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40">
+                                    <stop offset="0%" stop-color="#0052FF"/>
+                                    <stop offset="100%" stop-color="#00D4FF"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="logo-text">PayFlow</span>
+                    </a>
+                    <div class="nav-links">
+                        <a href="#personal">Personal</a>
+                        <a href="#business">Business</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#about">About</a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <a href="#login" class="nav-link-secondary">Log In</a>
+                    <a href="#signup" class="btn-nav">Open Account</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Calculator -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <!-- Left Content -->
+                <div class="hero-content">
+                    <div class="trust-badge-hero">
+                        🏆 Trusted by 3M+ Europeans
+                    </div>
+                    <h1 class="hero-title">
+                        Send money globally.<br/>
+                        <span class="gradient-text">Save up to 8x</span> on fees.
+                    </h1>
+                    <p class="hero-description">
+                        No hidden charges. Real exchange rates. Lightning-fast transfers to 180+ countries. 
+                        Your money arrives in minutes, not days.
+                    </p>
+                    
+                    <!-- Key Benefits -->
+                    <div class="hero-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">⚡</span>
+                            <span>Instant transfers</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🔒</span>
+                            <span>Bank-level security</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💰</span>
+                            <span>Real exchange rates</span>
+                        </div>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="compliance-badges">
+                        <div class="badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2L3 6v5c0 4.42 2.84 8.44 7 10 4.16-1.56 7-5.58 7-10V6l-7-4z"/>
+                            </svg>
+                            <span>PSD2 Compliant</span>
+                        </div>
+                        <div class="badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2L3 6v5c0 4.42 2.84 8.44 7 10 4.16-1.56 7-5.58 7-10V6l-7-4z"/>
+                            </svg>
+                            <span>GDPR Protected</span>
+                        </div>
+                        <div class="badge">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2L3 6v5c0 4.42 2.84 8.44 7 10 4.16-1.56 7-5.58 7-10V6l-7-4z"/>
+                            </svg>
+                            <span>FCA Regulated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Interactive Calculator -->
+                <div class="hero-calculator">
+                    <div class="calculator-card">
+                        <div class="calculator-header">
+                            <h3>Calculate your savings</h3>
+                            <p>See how much you'll save vs traditional banks</p>
+                        </div>
+
+                        <div class="calculator-form">
+                            <!-- Send Amount -->
+                            <div class="form-group">
+                                <label>You send</label>
+                                <div class="input-with-currency">
+                                    <input type="number" id="sendAmount" value="1000" min="1" step="1">
+                                    <select id="sendCurrency" class="currency-select">
+                                        <option value="EUR" selected>EUR 🇪🇺</option>
+                                        <option value="GBP">GBP 🇬🇧</option>
+                                        <option value="USD">USD 🇺🇸</option>
+                                        <option value="CHF">CHF 🇨🇭</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Exchange Icon -->
+                            <div class="exchange-icon">
+                                <button type="button" id="swapCurrencies" class="swap-btn">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 10l5 5 5-5M7 6l5-5 5 5"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Receive Amount -->
+                            <div class="form-group">
+                                <label>Recipient gets</label>
+                                <div class="input-with-currency">
+                                    <input type="number" id="receiveAmount" value="1095.50" readonly>
+                                    <select id="receiveCurrency" class="currency-select">
+                                        <option value="USD" selected>USD 🇺🇸</option>
+                                        <option value="GBP">GBP 🇬🇧</option>
+                                        <option value="EUR">EUR 🇪🇺</option>
+                                        <option value="CAD">CAD 🇨🇦</option>
+                                        <option value="AUD">AUD 🇦🇺</option>
+                                        <option value="JPY">JPY 🇯🇵</option>
+                                        <option value="INR">INR 🇮🇳</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Exchange Rate Info -->
+                            <div class="rate-info">
+                                <div class="rate-row">
+                                    <span class="rate-label">Exchange rate</span>
+                                    <span class="rate-value" id="exchangeRate">1 EUR = 1.0955 USD</span>
+                                </div>
+                                <div class="rate-row">
+                                    <span class="rate-label">Our fee</span>
+                                    <span class="rate-value highlight" id="ourFee">€2.50 (0.25%)</span>
+                                </div>
+                                <div class="rate-row">
+                                    <span class="rate-label">Transfer time</span>
+                                    <span class="rate-value" id="transferTime">⚡ Instant</span>
+                                </div>
+                            </div>
+
+                            <!-- Comparison -->
+                            <div class="comparison-box">
+                                <div class="comparison-row">
+                                    <span>💸 You save vs banks:</span>
+                                    <strong class="savings" id="savings">€76.50</strong>
+                                </div>
+                                <div class="comparison-note">
+                                    Traditional banks would charge €79 in hidden fees
+                                </div>
+                            </div>
+
+                            <!-- CTA Button -->
+                            <button class="btn-calculator">
+                                Get Started - It's Free
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+
+                            <!-- Trust Note -->
+                            <div class="calculator-footer">
+                                <p>✓ No hidden fees &nbsp;•&nbsp; ✓ Cancel anytime &nbsp;•&nbsp; ✓ 24/7 support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Stats -->
+        <div class="floating-stats">
+            <div class="stat-card">
+                <div class="stat-number">€12B+</div>
+                <div class="stat-label">Transferred monthly</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3M+</div>
+                <div class="stat-label">Happy customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">180+</div>
+                <div class="stat-label">Countries</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bank Partnerships -->
+    <section class="partners">
+        <div class="container">
+            <p class="partners-title">Trusted partner of leading banks & financial institutions</p>
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Deutsche Bank</text>
+                        <circle cx="15" cy="20" r="6" fill="#0052CC"/>
+                    </svg>
+                </div>
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#FF6200" text-anchor="middle">ING</text>
+                        <rect x="10" y="15" width="20" height="10" rx="2" fill="#FF6200"/>
+                    </svg>
+                </div>
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a2e" text-anchor="middle">Rabobank</text>
+                        <circle cx="15" cy="20" r="6" fill="#00A3E0"/>
+                    </svg>
+                </div>
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#0000A0" text-anchor="middle">Nordea</text>
+                        <path d="M10 20 L20 12 L30 20 L20 28 Z" fill="#0000A0"/>
+                    </svg>
+                </div>
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#004481" text-anchor="middle">BBVA</text>
+                        <rect x="10" y="12" width="8" height="16" rx="2" fill="#004481"/>
+                        <rect x="20" y="15" width="8" height="13" rx="2" fill="#004481"/>
+                    </svg>
+                </div>
+                <div class="partner-logo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                        <rect width="120" height="40" rx="6" fill="#F8F9FF"/>
+                        <text x="60" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#00A776" text-anchor="middle">SEB</text>
+                        <circle cx="15" cy="20" r="6" fill="#00A776"/>
+                        <circle cx="15" cy="20" r="3" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Send money in 3 simple steps</h2>
+                <p>Fast, secure, and transparent. No surprises.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">👤</div>
+                    <h3>Create account</h3>
+                    <p>Sign up in minutes. Verify your identity securely with our PSD2-compliant process.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💶</div>
+                    <h3>Add money</h3>
+                    <p>Fund your account via bank transfer, card, or Apple Pay. Instant confirmation.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🚀</div>
+                    <h3>Send & track</h3>
+                    <p>Transfer money globally. Track in real-time. Arrives in minutes, not days.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why 3M+ Europeans choose PayFlow</h2>
+                <p>Everything you need for fast, secure international payments</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💸</div>
+                    <h3>Real exchange rates</h3>
+                    <p>We use the mid-market rate — the same one you see on Google. No markup, no hidden fees.</p>
+                    <a href="#" class="feature-link">See our rates →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning fast</h3>
+                    <p>80% of transfers arrive instantly. The rest within 24 hours. Track every step in real-time.</p>
+                    <a href="#" class="feature-link">Check transfer times →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-level security</h3>
+                    <p>Your money is protected by 256-bit encryption. We're regulated by FCA and comply with PSD2.</p>
+                    <a href="#" class="feature-link">Learn about security →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>180+ countries</h3>
+                    <p>Send to almost anywhere in the world. Support for 50+ currencies and local payment methods.</p>
+                    <a href="#" class="feature-link">See all countries →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile-first app</h3>
+                    <p>Manage everything on the go. iOS & Android apps rated 4.8/5 by 500K+ users.</p>
+                    <a href="#" class="feature-link">Download app →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Multi-currency account</h3>
+                    <p>Hold money in 50+ currencies. Get local bank details for EUR, GBP, USD and more.</p>
+                    <a href="#" class="feature-link">Open account →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Comparison -->
+    <section class="pricing-comparison" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Compare our fees vs traditional banks</h2>
+                <p>See why millions choose PayFlow for international transfers</p>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Transfer of €1,000</th>
+                            <th>
+                                <div class="provider-logo">
+                                    <span class="logo-highlight">PayFlow</span>
+                                </div>
+                            </th>
+                            <th>Traditional Banks</th>
+                            <th>Other Providers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Transfer fee</td>
+                            <td class="highlight-cell">€2.50</td>
+                            <td>€25 - €45</td>
+                            <td>€15 - €30</td>
+                        </tr>
+                        <tr>
+                            <td>Exchange rate markup</td>
+                            <td class="highlight-cell">€0 <span class="badge-small">Real rate</span></td>
+                            <td>€30 - €50</td>
+                            <td>€10 - €25</td>
+                        </tr>
+                        <tr>
+                            <td>Hidden fees</td>
+                            <td class="highlight-cell">€0</td>
+                            <td>€5 - €15</td>
+                            <td>€5 - €10</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total cost</strong></td>
+                            <td class="highlight-cell"><strong>€2.50</strong></td>
+                            <td><strong>€60 - €110</strong></td>
+                            <td><strong>€30 - €65</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Transfer time</td>
+                            <td class="highlight-cell">⚡ Instant</td>
+                            <td>3-5 days</td>
+                            <td>1-2 days</td>
+                        </tr>
+                        <tr>
+                            <td>You save</td>
+                            <td class="highlight-cell savings-cell">
+                                <span class="savings-badge">Save up to €107.50</span>
+                            </td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pricing-note">
+                <p>💡 <strong>Example based on EUR to USD transfer of €1,000.</strong> Traditional bank fees vary. Our fees are always transparent and shown upfront.</p>
+            </div>
+
+            <div class="cta-center">
+                <a href="#signup" class="btn-primary-large">
+                    Start Saving Today
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <p class="cta-subtext">No credit card required • Cancel anytime • 24/7 support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by millions across Europe</h2>
+                <p>See what our customers say about us</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "Switched from my bank to PayFlow and saved over €200 in the first month alone. 
+                        The app is incredibly easy to use and transfers are instant. Highly recommend!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="Maria Silva">
+                        <div>
+                            <div class="author-name">Maria Silva</div>
+                            <div class="author-title">Freelancer, Portugal 🇵🇹</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "As a business owner sending payments to suppliers in Asia, PayFlow has been a game-changer. 
+                        Real exchange rates and lightning-fast transfers. No more surprises."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/150?img=33" alt="Lars Jensen">
+                        <div>
+                            <div class="author-name">Lars Jensen</div>
+                            <div class="author-title">CEO, Denmark 🇩🇰</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p class="testimonial-text">
+                        "I send money to my family in India every month. With PayFlow, they receive it in minutes, 
+                        not days. The fees are transparent and way cheaper than Western Union."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/150?img=47" alt="Priya Patel">
+                        <div>
+                            <div class="author-name">Priya Patel</div>
+                            <div class="author-title">Software Engineer, Netherlands 🇳🇱</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trustpilot Style Rating -->
+            <div class="overall-rating">
+                <div class="rating-score">
+                    <div class="score">4.8</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="rating-label">Excellent</div>
+                </div>
+                <div class="rating-details">
+                    <p>Based on <strong>127,493 reviews</strong> on Trustpilot</p>
+                    <div class="trustpilot-logo">
+                        <svg viewBox="0 0 100 30" fill="none">
+                            <rect width="100" height="30" rx="4" fill="#00B67A"/>
+                            <text x="50" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">Trustpilot</text>
+                            <path d="M10 10 L12 16 L18 16 L13 19 L15 25 L10 21 L5 25 L7 19 L2 16 L8 16 Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Security -->
+    <section class="trust-security">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your money is safe with us</h2>
+                <p>Bank-level security and full regulatory compliance</p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-icon">🛡️</div>
+                    <h3>PSD2 Compliant</h3>
+                    <p>Fully compliant with EU's Payment Services Directive 2. Strong customer authentication protects every transaction.</p>
+                </div>
+
+                <div class="security-card">
+                    <div class="security-icon">🔐</div>
+                    <h3>GDPR Protected</h3>
+                    <p>Your data is protected under GDPR. We never sell your information to third parties. Your privacy is our priority.</p>
+                </div>
+
+                <div class="security-card">
+                    <div class="security-icon">🏦</div>
+                    <h3>FCA Regulated</h3>
+                    <p>Authorized and regulated by the Financial Conduct Authority (FCA). Your funds are safeguarded in segregated accounts.</p>
+                </div>
+
+                <div class="security-card">
+                    <div class="security-icon">🔒</div>
+                    <h3>256-bit Encryption</h3>
+                    <p>Military-grade encryption protects your data. Same security standards as major banks and financial institutions.</p>
+                </div>
+
+                <div class="security-card">
+                    <div class="security-icon">✅</div>
+                    <h3>2FA Authentication</h3>
+                    <p>Two-factor authentication adds an extra layer of security. Biometric login (Face ID / Touch ID) available on mobile.</p>
+                </div>
+
+                <div class="security-card">
+                    <div class="security-icon">🔔</div>
+                    <h3>24/7 Monitoring</h3>
+                    <p>Advanced fraud detection monitors every transaction. Instant alerts for suspicious activity. Your account is always protected.</p>
+                </div>
+            </div>
+
+            <!-- Compliance Logos -->
+            <div class="compliance-logos">
+                <h4>Certified & Regulated by</h4>
+                <div class="logos-grid">
+                    <div class="compliance-badge">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="12" fill="#E8F0FE"/>
+                            <circle cx="40" cy="35" r="18" stroke="#0052FF" stroke-width="3" fill="none"/>
+                            <path d="M40 20 L45 30 L55 32 L47 40 L49 50 L40 45 L31 50 L33 40 L25 32 L35 30 Z" fill="#0052FF"/>
+                            <text x="40" y="68" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#0052FF" text-anchor="middle">FCA</text>
+                        </svg>
+                    </div>
+                    <div class="compliance-badge">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="12" fill="#E8F0FE"/>
+                            <rect x="20" y="20" width="40" height="30" rx="4" stroke="#0052FF" stroke-width="3" fill="none"/>
+                            <circle cx="40" cy="35" r="6" fill="#0052FF"/>
+                            <text x="40" y="68" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#0052FF" text-anchor="middle">PSD2</text>
+                        </svg>
+                    </div>
+                    <div class="compliance-badge">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="12" fill="#E8F0FE"/>
+                            <path d="M40 18 L50 28 L50 48 L40 58 L30 48 L30 28 Z" stroke="#0052FF" stroke-width="3" fill="none"/>
+                            <path d="M35 38 L38 42 L45 32" stroke="#0052FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="40" y="68" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#0052FF" text-anchor="middle">GDPR</text>
+                        </svg>
+                    </div>
+                    <div class="compliance-badge">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="12" fill="#E8F0FE"/>
+                            <circle cx="40" cy="35" r="15" stroke="#0052FF" stroke-width="3" fill="none"/>
+                            <path d="M28 35 L36 43 L52 27" stroke="#0052FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <text x="40" y="60" font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#0052FF" text-anchor="middle">ISO</text>
+                            <text x="40" y="70" font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#0052FF" text-anchor="middle">27001</text>
+                        </svg>
+                    </div>
+                    <div class="compliance-badge">
+                        <svg viewBox="0 0 80 80" fill="none">
+                            <rect width="80" height="80" rx="12" fill="#E8F0FE"/>
+                            <rect x="25" y="22" width="30" height="26" rx="3" stroke="#0052FF" stroke-width="3" fill="none"/>
+                            <circle cx="40" cy="35" r="4" fill="#0052FF"/>
+                            <text x="40" y="63" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#0052FF" text-anchor="middle">SOC 2</text>
+                            <text x="40" y="72" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#0052FF" text-anchor="middle">Type II</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Currency Pricing -->
+    <section class="currency-pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent fees for all currencies</h2>
+                <p>No hidden charges. See exactly what you'll pay before you send</p>
+            </div>
+
+            <div class="currency-table-wrapper">
+                <table class="currency-table">
+                    <thead>
+                        <tr>
+                            <th>Currency Route</th>
+                            <th>Transfer Fee</th>
+                            <th>Exchange Markup</th>
+                            <th>Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🇪🇺 EUR → 🇺🇸 USD</td>
+                            <td>€2.50 (0.25%)</td>
+                            <td class="highlight">€0 (Mid-market)</td>
+                            <td><span class="badge-instant">Instant</span></td>
+                        </tr>
+                        <tr>
+                            <td>🇬🇧 GBP → 🇪🇺 EUR</td>
+                            <td>£2.00 (0.25%)</td>
+                            <td class="highlight">£0 (Mid-market)</td>
+                            <td><span class="badge-instant">Instant</span></td>
+                        </tr>
+                        <tr>
+                            <td>🇺🇸 USD → 🇮🇳 INR</td>
+                            <td>$3.00 (0.30%)</td>
+                            <td class="highlight">$0 (Mid-market)</td>
+                            <td><span class="badge-fast">1-2 hours</span></td>
+                        </tr>
+                        <tr>
+                            <td>🇪🇺 EUR → 🇯🇵 JPY</td>
+                            <td>€2.50 (0.25%)</td>
+                            <td class="highlight">€0 (Mid-market)</td>
+                            <td><span class="badge-fast">1-2 hours</span></td>
+                        </tr>
+                        <tr>
+                            <td>🇨🇭 CHF → 🇦🇺 AUD</td>
+                            <td>CHF 3.00 (0.30%)</td>
+                            <td class="highlight">CHF 0 (Mid-market)</td>
+                            <td><span class="badge-standard">1-2 days</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="currency-note">
+                <p>📊 <strong>See fees for 180+ countries:</strong> Use our calculator above to get exact pricing for your transfer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-box">
+                <div class="cta-content">
+                    <h2>Ready to save on your international transfers?</h2>
+                    <p>Join 3M+ Europeans who've already saved over €2 billion in fees</p>
+                    
+                    <div class="cta-form">
+                        <input type="email" placeholder="Enter your email" class="cta-input">
+                        <button class="btn-cta-submit">
+                            Get Started Free
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="cta-benefits">
+                        <span>✓ Free account setup</span>
+                        <span>✓ No monthly fees</span>
+                        <span>✓ Cancel anytime</span>
+                    </div>
+                </div>
+
+                <div class="cta-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            📱
+                            <div class="screen-content">
+                                <div class="balance">€2,450.00</div>
+                                <div class="currencies">
+                                    <span>🇪🇺 EUR</span>
+                                    <span>🇺🇸 USD</span>
+                                    <span>🇬🇧 GBP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="12" fill="url(#footerGradient)"/>
+                            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="25" cy="15" r="3" fill="#FFD700" opacity="0.8"/>
+                            <defs>
+                                <linearGradient id="footerGradient" x1="0" y1="0" x2="40" y2="40">
+                                    <stop offset="0%" stop-color="#0052FF"/>
+                                    <stop offset="100%" stop-color="#00D4FF"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>PayFlow</span>
+                    </div>
+                    <p class="footer-description">
+                        The smart way to send money globally. Trusted by 3M+ Europeans.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="LinkedIn">in</a>
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#personal">Personal Account</a></li>
+                        <li><a href="#business">Business Account</a></li>
+                        <li><a href="#cards">Multi-currency Card</a></li>
+                        <li><a href="#api">API for Developers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#press">Press</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#fees">Fee Structure</a></li>
+                        <li><a href="#countries">Supported Countries</a></li>
+                        <li><a href="#contact">Contact Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                        <li><a href="#compliance">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-compliance">
+                    <p>
+                        <strong>PayFlow Technologies OÜ</strong> is authorized and regulated by the Financial Conduct Authority (FCA) 
+                        under the Payment Services Regulations 2017 (FRN: 900000). Registered in Estonia (Registry code: 12345678).
+                    </p>
+                    <p>
+                        Your money is protected under the Financial Services Compensation Scheme (FSCS). 
+                        We are compliant with PSD2, GDPR, and all applicable EU regulations.
+                    </p>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 PayFlow Technologies OÜ. All rights reserved.</p>
+                    <div class="footer-badges">
+                        <span class="badge-footer">🛡️ PSD2</span>
+                        <span class="badge-footer">🔒 GDPR</span>
+                        <span class="badge-footer">🏦 FCA</span>
+                        <span class="badge-footer">✓ ISO 27001</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
