@@ -1,0 +1,35 @@
+name: Deploy to SiteGround
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Permet de déclencher manuellement depuis GitHub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to SiteGround via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.SITEGROUND_HOST }}
+          username: ${{ secrets.SITEGROUND_USERNAME }}
+          password: ${{ secrets.SITEGROUND_PASSWORD }}
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/.DS_Store
+            **/.env*
+            **/README.md
+            **/*.md
+            !README.md
+          dangerous-clean-slate: false
+
