@@ -20,31 +20,56 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           
-          # Sauvegarder la clé SSH avec gestion des retours à la ligne
-          echo "${{ secrets.SITEGROUND_SSH_KEY }}" > ~/.ssh/deploy_key
+          # Sauvegarder la clé SSH - utiliser printf pour préserver les retours à la ligne
+          printf '%s\n' "${{ secrets.SITEGROUND_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           
-          # Vérifier que la clé est valide
-          echo "Checking SSH key format..."
-          if ! ssh-keygen -l -f ~/.ssh/deploy_key > /dev/null 2>&1; then
-            echo "ERROR: Invalid SSH key format!"
-            echo "Key starts with:"
-            head -n 1 ~/.ssh/deploy_key
-            echo "Key ends with:"
-            tail -n 1 ~/.ssh/deploy_key
+          # Vérifier que la clé n'est pas vide
+          if [ ! -s ~/.ssh/deploy_key ]; then
+            echo "ERROR: SSH key is empty!"
             exit 1
           fi
           
-          echo "SSH key is valid"
+          # Vérifier le format de la clé
+          echo "Checking SSH key format..."
+          KEY_START=$(head -n 1 ~/.ssh/deploy_key | cut -c1-20)
+          KEY_END=$(tail -n 1 ~/.ssh/deploy_key | cut -c1-20)
+          KEY_LINES=$(wc -l < ~/.ssh/deploy_key)
+          
+          echo "Key info: $KEY_LINES lines, starts with: $KEY_START, ends with: $KEY_END"
+          
+          # Vérifier que la clé commence et finit correctement
+          if ! head -n 1 ~/.ssh/deploy_key | grep -q "BEGIN"; then
+            echo "ERROR: Key does not start with BEGIN marker!"
+            echo "First line: $(head -n 1 ~/.ssh/deploy_key)"
+            exit 1
+          fi
+          
+          if ! tail -n 1 ~/.ssh/deploy_key | grep -q "END"; then
+            echo "ERROR: Key does not end with END marker!"
+            echo "Last line: $(tail -n 1 ~/.ssh/deploy_key)"
+            exit 1
+          fi
+          
+          # Vérifier que la clé est valide avec ssh-keygen
+          if ! ssh-keygen -l -f ~/.ssh/deploy_key > /dev/null 2>&1; then
+            echo "ERROR: Invalid SSH key format (ssh-keygen validation failed)!"
+            echo "Key length: $KEY_LINES lines"
+            echo "First 3 lines:"
+            head -n 3 ~/.ssh/deploy_key
+            echo "Last 3 lines:"
+            tail -n 3 ~/.ssh/deploy_key
+            exit 1
+          fi
+          
+          echo "SSH key is valid ✓"
           
           # Ajouter le host aux known_hosts
           ssh-keyscan -p ${{ secrets.SITEGROUND_PORT || '22' }} -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
           
           echo "Testing SSH connection..."
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 -v ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'SSH connection successful' && pwd" || {
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'SSH connection successful' && pwd" || {
             echo "SSH connection failed!"
-            echo "Trying to diagnose..."
-            ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'test'" 2>&1 || true
             exit 1
           }
       
