@@ -18,12 +18,35 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # Sauvegarder la clé SSH avec gestion des retours à la ligne
           echo "${{ secrets.SITEGROUND_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p ${{ secrets.SITEGROUND_PORT || '22' }} -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts
-          echo "SSH key configured"
+          
+          # Vérifier que la clé est valide
+          echo "Checking SSH key format..."
+          if ! ssh-keygen -l -f ~/.ssh/deploy_key > /dev/null 2>&1; then
+            echo "ERROR: Invalid SSH key format!"
+            echo "Key starts with:"
+            head -n 1 ~/.ssh/deploy_key
+            echo "Key ends with:"
+            tail -n 1 ~/.ssh/deploy_key
+            exit 1
+          fi
+          
+          echo "SSH key is valid"
+          
+          # Ajouter le host aux known_hosts
+          ssh-keyscan -p ${{ secrets.SITEGROUND_PORT || '22' }} -H ${{ secrets.SITEGROUND_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+          
           echo "Testing SSH connection..."
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'SSH connection successful' && pwd"
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 -v ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'SSH connection successful' && pwd" || {
+            echo "SSH connection failed!"
+            echo "Trying to diagnose..."
+            ssh -i ~/.ssh/deploy_key -p ${{ secrets.SITEGROUND_PORT || '22' }} -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${{ secrets.SITEGROUND_USERNAME }}@${{ secrets.SITEGROUND_HOST }} "echo 'test'" 2>&1 || true
+            exit 1
+          }
       
       - name: Deploy to SiteGround via SSH/rsync
         run: |
